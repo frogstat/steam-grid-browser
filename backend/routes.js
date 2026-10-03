@@ -2,9 +2,7 @@ import express from "express";
 
 import {
     getGameById,
-    getGameBySteamId,
-    getGridById,
-    getGridBySteamId,
+    getGameByIdPure,
     searchGames
 } from "./steamGridApi.js";
 
@@ -19,10 +17,10 @@ router.get("/game/id/:id", async (req, res) => {
     }
 });
 
-router.get("/game/steamid/:id", async (req, res) => {
+router.get("/game/pure/id/:id", async (req, res) => {
     try {
         const gameId = getIdFromParams(req.params);
-        return res.status(200).json(await getGameBySteamId(gameId));
+        return res.status(200).json(await getGameByIdPure(gameId));
     } catch (e) {
         return handleError(res, e.message);
     }

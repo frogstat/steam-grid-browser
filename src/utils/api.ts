@@ -10,6 +10,10 @@ export async function getGameById(id: string): Promise<any> {
     return await fetchGet<Game>(`${BASE_URL}/game/id/${id}`)
 }
 
+export async function getGameByIdPure(id: string): Promise<any> {
+    return await fetchGet<Game>(`${BASE_URL}/game/pure/id/${id}`)
+}
+
 
 export async function fetchGet<T>(url: string): Promise<T> {
     const response = await fetch(url);
