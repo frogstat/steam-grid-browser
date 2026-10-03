@@ -1,5 +1,5 @@
 import fallbackImage from "../assets/fallback.png"
-import blackImage from "../assets/black.png"
+import blackImage from "../assets/loading.gif"
 import {useEffect, useState} from "react";
 import {getGameById} from "../utils/api.ts";
 import type {Game} from "../utils/types.ts";

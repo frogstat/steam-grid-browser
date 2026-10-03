@@ -22,7 +22,9 @@ export async function getGameById(gameId) {
 export async function searchGames(query) {
     console.log(`Searching for ${query}`);
     const responseData = await fetchGet(`${BASE_URL}/search/autocomplete/${query}`);
-    return responseData.data.map(game => {
+    return responseData.data
+        .filter(game => game.name.toLowerCase().includes(query.toLowerCase()))
+        .map(game => {
         return {
             id: game.id,
             name: game.name,
