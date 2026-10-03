@@ -28,24 +28,6 @@ router.get("/game/steamid/:id", async (req, res) => {
     }
 });
 
-router.get("/grid/id/:id", async (req, res) => {
-    try {
-        const gameId = getIdFromParams(req.params);
-        return res.status(200).json(await getGridById(gameId));
-    } catch (e) {
-        return handleError(res, e.message);
-    }
-});
-
-router.get("/grid/steamid/:id", async (req, res) => {
-    try {
-        const gameId = getIdFromParams(req.params);
-        return res.status(200).json(await getGridBySteamId(gameId));
-    } catch (e) {
-        return handleError(res, e.message);
-    }
-});
-
 router.get("/search/:query", async (req, res) => {
     try {
         const { query } = req.params;

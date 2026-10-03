@@ -1,23 +1,33 @@
 import fallbackImage from "../assets/fallback.png"
-import {useState} from "react";
+import blackImage from "../assets/black.png"
+import {useEffect, useState} from "react";
+import {getGameById} from "../utils/api.ts";
+import type {Game} from "../utils/types.ts";
 
 type GameCardProps = {
+    id: number;
     title: string;
-    thumbnail: string;
 }
 
-function GameCard({ title, thumbnail }: GameCardProps) {
+function GameCard({id, title}: GameCardProps) {
 
-    const [imageSrc, setImageSrc] = useState(thumbnail);
+    const [imageSrc, setImageSrc] = useState(blackImage);
 
-    function handleImageError(){
-        setImageSrc(fallbackImage);
-    }
+    useEffect(() => {
+        getGameById(String(id)).then((game: Game) => {
+            console.log(game);
+            setImageSrc(game.grids[0]?.thumbnail ?? fallbackImage);
+        })
+    }, [])
+
 
     return (
         <div className="game-card">
-            <img src={imageSrc} onError={handleImageError} alt="game cover"/>
-            <p>{title}</p>
+            <img
+                className="game-card-image"
+                src={imageSrc}
+                alt="cover"/>
+            <span>{title}</span>
         </div>
     )
 }
