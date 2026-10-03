@@ -28,7 +28,7 @@ export async function getGridBySteamId(gameId) {
 
 export async function searchGames(query) {
     console.log(`Searching for ${query}`);
-    const responseData = await fetchGet(`${BASE_URL}/v2/search/autocomplete/${query}`);
+    const responseData = await fetchGet(`${BASE_URL}/search/autocomplete/${query}`);
     return responseData.data.map((game) => {
         return {
             id: game.id,
