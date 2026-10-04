@@ -1,8 +1,8 @@
 import fallbackImage from "../assets/fallback.png"
 import blackImage from "../assets/loading.gif"
 import {useEffect, useState} from "react";
-import {getGameById} from "../utils/api.ts";
-import type {Game} from "../utils/types.ts";
+import {fetchCover} from "../utils/api.ts";
+import type {GameImage} from "../utils/types.ts";
 
 type GameCardProps = {
     id: number;
@@ -14,11 +14,11 @@ function GameCard({id, title}: GameCardProps) {
     const [imageSrc, setImageSrc] = useState(blackImage);
 
     useEffect(() => {
-        getGameById(String(id)).then((game: Game) => {
-            console.log(game);
-            setImageSrc(game.grids[0]?.thumbnail ?? fallbackImage);
+        fetchCover(id).then((cover: GameImage) => {
+            console.log(cover);
+            setImageSrc(cover.thumbnail ?? fallbackImage);
         })
-    }, [])
+    }, [id])
 
 
     return (

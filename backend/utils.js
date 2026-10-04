@@ -32,6 +32,6 @@ export function parseGridData(originData){
 export function parseGameData(originData){
     return {
         id: originData.data.id,
-        name: originData.data.name
+        title: originData.data.name
     }
 }

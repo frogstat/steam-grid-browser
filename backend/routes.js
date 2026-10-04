@@ -1,30 +1,41 @@
 import express from "express";
 
 import {
-    getGameById,
-    getGameByIdPure,
+    getCover,
+    getGame,
+    getImages,
     searchGames
 } from "./steamGridApi.js";
 
 const router = express.Router();
 
-router.get("/game/id/:id", async (req, res) => {
+router.get("/game/:id", async (req, res) => {
     try {
-        const gameId = getIdFromParams(req.params);
-        return res.status(200).json(await getGameById(gameId));
+        const {id} = req.params;
+        return res.status(200).json(await getGame(id));
     } catch (e) {
         return handleError(res, e.message);
     }
 });
 
-router.get("/game/pure/id/:id", async (req, res) => {
+router.get("/images/:type/:id", async (req, res) => {
     try {
-        const gameId = getIdFromParams(req.params);
-        return res.status(200).json(await getGameByIdPure(gameId));
+        const { type, id } = req.params;
+        return res.status(200).json(await getImages(id, type));
     } catch (e) {
         return handleError(res, e.message);
     }
 });
+
+router.get("/cover/:id", async (req, res) => {
+    try {
+        const {id} = req.params;
+        return res.status(200).json(await getCover(id));
+    } catch (e) {
+        return handleError(res, e.message);
+    }
+});
+
 
 router.get("/search/:query", async (req, res) => {
     try {
@@ -41,14 +52,6 @@ function handleError(res, errorMessage) {
     return res.status(502).json({
         error: errorMessage
     })
-}
-
-function getIdFromParams(params) {
-    const {id} = params;
-    if (!id) {
-        throw new Error("game id must be provided");
-    }
-    return id;
 }
 
 export default router

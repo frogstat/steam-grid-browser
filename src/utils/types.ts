@@ -1,13 +1,9 @@
 export type Game = {
-    id: number;
-    name: string;
-    grids: Array<{
-        thumbnail: string;
-        image: string;
-    }>;
+    id: number,
+    title: string
 }
 
-export type GameSearchResult = {
-    id: number;
-    name: string;
+export type GameImage = {
+    thumbnail: string
+    image: string
 }

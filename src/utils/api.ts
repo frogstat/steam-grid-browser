@@ -1,17 +1,22 @@
-import type {Game, GameSearchResult} from "./types.ts";
+import type {Game, GameImage} from "./types.ts";
+export type ImageTypes =  "grids" | "heroes" | "icons";
 
 const BASE_URL = "http://localhost:3001/api"
 
-export async function searchGames(query: string): Promise<GameSearchResult[]> {
-    return await fetchGet<GameSearchResult[]>(`${BASE_URL}/search/${query}`);
+export async function searchGames(query: string): Promise<Game[]> {
+    return await fetchGet<Game[]>(`${BASE_URL}/search/${query}`);
 }
 
-export async function getGameById(id: string): Promise<any> {
-    return await fetchGet<Game>(`${BASE_URL}/game/id/${id}`)
+export async function fetchGame(id: number | string): Promise<Game> {
+    return await fetchGet<Game>(`${BASE_URL}/game/${id}`)
 }
 
-export async function getGameByIdPure(id: string): Promise<any> {
-    return await fetchGet<Game>(`${BASE_URL}/game/pure/id/${id}`)
+export async function fetchImages(id: number | string, imageType: ImageTypes): Promise<GameImage[]> {
+    return await fetchGet<GameImage[]>(`${BASE_URL}/${imageType}/${id}`)
+}
+
+export async function fetchCover(id: number | string): Promise<GameImage> {
+    return await fetchGet<GameImage>(`${BASE_URL}/cover/${id}`)
 }
 
 
