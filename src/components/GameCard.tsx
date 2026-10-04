@@ -27,7 +27,10 @@ function GameCard({id, title}: GameCardProps) {
                 className="game-card-image"
                 src={imageSrc}
                 alt="cover"/>
-            <span>{title}</span>
+            <div className="game-card-title">
+                <span>{title}</span>
+            </div>
+
         </div>
     )
 }
