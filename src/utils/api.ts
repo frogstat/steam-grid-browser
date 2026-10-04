@@ -12,7 +12,7 @@ export async function fetchGame(id: number | string): Promise<Game> {
 }
 
 export async function fetchImages(id: number | string, imageType: ImageTypes): Promise<GameImage[]> {
-    return await fetchGet<GameImage[]>(`${BASE_URL}/${imageType}/${id}`)
+    return await fetchGet<GameImage[]>(`${BASE_URL}/images/${imageType}/${id}`)
 }
 
 export async function fetchCover(id: number | string): Promise<GameImage> {

@@ -8,7 +8,20 @@ export async function getGame(gameId) {
 }
 
 export async function getImages(gameId, imageType) {
-    const responseData = await fetchGet(`${BASE_URL}/${imageType}/game/${gameId}/?dimensions=600x900&nsfw=any`);
+    const args = (function () {
+        switch (imageType) {
+            case "grids":
+                return "/?dimensions=600x900&nsfw=any";
+            case "heroes":
+                return "/?dimensions=1920x620&nsfw=any";
+            case "icons":
+                return "/?nsfw=any";
+            default:
+                return "";
+        }
+    })();
+
+    const responseData = await fetchGet(`${BASE_URL}/${imageType}/game/${gameId}${args}`);
     return parseGridData(responseData)
 }
 
