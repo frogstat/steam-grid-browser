@@ -2,6 +2,7 @@ import type {ImageTypes} from "../utils/api.ts";
 import {useImagesView} from "../hooks/useImagesView.ts";
 import type {GameImage} from "../utils/types.ts";
 import DetailedImageView from "./DetailedImageView.tsx";
+import Image from "./Image.tsx";
 
 type ImagesViewProps = {
     id: number;
@@ -29,11 +30,7 @@ function ImagesView({id, imageType}: ImagesViewProps) {
                 key={index}
                 className="images-view-image-container"
                 onClick={() => enterDetailedView(image)}>
-                <img
-                    className={`images-view-image images-view-image-${imageType}`}
-                    src={image.thumbnail}
-                    alt="thumbnail"
-                />
+                <Image thumbnail={image.thumbnail} imageType={imageType}/>
             </div>
         )
 

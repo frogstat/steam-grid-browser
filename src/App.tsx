@@ -10,7 +10,6 @@ function App() {
         setQuery,
         results,
         handleSubmit,
-        checkboxRef,
         selectedGame,
         setSelectedGame,
         unsetGame
@@ -32,17 +31,17 @@ function App() {
     }
 
     return (
-        <>
+        <div className="app">
             <form onSubmit={e => handleSubmit(e)}>
                 <input
                     type="text"
                     value={query}
                     placeholder="Search Game"
-                    onChange={(e) => setQuery(e.target.value)}/><br/>
-                <input ref={checkboxRef} type="checkbox"/> Search by ID
+                    onChange={(e) => setQuery(e.target.value)}/>
+                <button type="submit">Search</button>
             </form>
             {resolveAppScreen()}
-        </>
+        </div>
     )
 }
 
