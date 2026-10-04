@@ -7,10 +7,14 @@ export function useSearch() {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<Game[] | null>(null);
     const checkboxRef = useRef<HTMLInputElement>(null);
+    const [selectedGame, setSelectedGame] = useState<Game | null>(null);
 
     function handleSubmit(e: any) {
         e.preventDefault();
+        setSelectedGame(null)
         setResults(null);
+        setQuery("")
+
         if (!query) {
             return;
         }
@@ -37,7 +41,9 @@ export function useSearch() {
         setQuery,
         results,
         handleSubmit,
-        checkboxRef
+        checkboxRef,
+        selectedGame,
+        setSelectedGame
     }
 
 }

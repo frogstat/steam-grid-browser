@@ -11,11 +11,11 @@ export async function getImages(gameId, imageType) {
     const args = (function () {
         switch (imageType) {
             case "grids":
-                return "/?dimensions=600x900&nsfw=any";
+                return "?dimensions=600x900&nsfw=any";
             case "heroes":
-                return "/?dimensions=1920x620&nsfw=any";
+                return "?dimensions=1920x620&nsfw=any";
             case "icons":
-                return "/?nsfw=any";
+                return "?nsfw=any";
             default:
                 return "";
         }
