@@ -1,6 +1,7 @@
 import type {ImageTypes} from "../utils/api.ts";
 import {useImagesView} from "../hooks/useImagesView.ts";
 import type {GameImage} from "../utils/types.ts";
+import DetailedImageView from "./DetailedImageView.tsx";
 
 type ImagesViewProps = {
     id: number;
@@ -8,18 +9,26 @@ type ImagesViewProps = {
 }
 
 
-function ImagesView({ id, imageType }: ImagesViewProps) {
+function ImagesView({id, imageType}: ImagesViewProps) {
 
-    const images = useImagesView(id, imageType);
+    const {
+        images,
+        selectedImage,
+        enterDetailedView,
+        exitDetailedView
+    } = useImagesView(id, imageType);
 
-    function resolveImages(){
-        if(!images){
+    function resolveImages() {
+        if (!images) {
             return <p>Loading...</p>;
-        } else if(images.length === 0) {
+        } else if (images.length === 0) {
             return <p>No images found</p>
         }
-        return images.map((image:GameImage, index:number) =>
-            <div key={index} className="images-view-image-container">
+        return images.map((image: GameImage, index: number) =>
+            <div
+                key={index}
+                className="images-view-image-container"
+                onClick={() => enterDetailedView(image)}>
                 <img
                     className={`images-view-image images-view-image-${imageType}`}
                     src={image.thumbnail}
@@ -32,12 +41,22 @@ function ImagesView({ id, imageType }: ImagesViewProps) {
     }
 
     return (
-      <div className="image-view">
-          <h1>{imageType}</h1>
-          <div className="images-container">
-              {resolveImages()}
-          </div>
-      </div>
+        <>
+            <div className="image-view">
+                <h1>{imageType}</h1>
+                <div className="images-container">
+                    {resolveImages()}
+                </div>
+            </div>
+
+            {selectedImage &&
+                <DetailedImageView
+                    image={selectedImage.image}
+                    exitDetailedView={exitDetailedView}
+                />
+            }
+        </>
+
     );
 }
 

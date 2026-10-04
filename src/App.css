@@ -1,4 +1,4 @@
-body{
+body {
     background: rgb(0 85 66 / 0.84);
     font-family: "Noto Sans", sans-serif;
 }
@@ -12,7 +12,7 @@ body{
 }
 
 .game-card {
-    color:white;
+    color: white;
 
     background-color: black;
     border-radius: 10px;
@@ -25,8 +25,7 @@ body{
     transition: 200ms ease;
 
 
-
-    &:hover{
+    &:hover {
         transition: 200ms ease;
         scale: 1.01;
         box-shadow: 0 0 1.875rem 0.0625rem #404040;
@@ -34,7 +33,7 @@ body{
     }
 }
 
-.game-card-title{
+.game-card-title {
     width: 90%;
     text-align: center;
     overflow: hidden;
@@ -52,13 +51,13 @@ body{
 
 /*----------------Images View----------*/
 
-.image-view{
+.image-view {
     text-align: center;
     background-color: #434343;
     border-radius: 10px;
 }
 
-.images-container{
+.images-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -66,30 +65,69 @@ body{
     gap: 10px;
 }
 
-.images-view-image-container{
+.images-view-image-container {
 
 }
 
-.images-view-image{
+.images-view-image {
     border-radius: 20px;
     transition: 200ms ease;
     cursor: pointer;
 
-    &.images-view-image-grids{
+    &.images-view-image-grids {
         height: 300px;
         width: 200px;
     }
-    &.images-view-image-heroes{
+
+    &.images-view-image-heroes {
         height: 155px;
         width: 455px;
     }
-    &.images-view-image-icons{
+
+    &.images-view-image-icons {
         height: 128px;
         width: 128px;
     }
+
     &:hover {
         transition: 200ms ease;
         transform: scale(1.05);
     }
 
+}
+
+/*---------Detailed View------------*/
+
+.detailed-view-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 1.25rem;
+    z-index: 100;
+}
+
+.detailed-view-container {
+    background-color: black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+
+    span {
+        color: #8a8a8a;
+        font-weight: bold;
+        cursor: pointer;
+        &:hover {
+            color: #c6c6c6;
+        }
+    }
+}
+
+.detailed-view-image{
+    max-height: 80vh;
+    max-width: 80vw;
 }

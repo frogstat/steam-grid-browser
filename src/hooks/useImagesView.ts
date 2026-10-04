@@ -4,6 +4,7 @@ import type {GameImage} from "../utils/types.ts";
 
 export function useImagesView(id:number, imageType: ImageTypes) {
     const [images, setImages] = useState<GameImage[] | null>(null)
+    const [selectedImage, setSelectedImage] = useState<GameImage | null>(null)
 
 
     useEffect(() => {
@@ -16,6 +17,21 @@ export function useImagesView(id:number, imageType: ImageTypes) {
 
     }, [id, imageType]);
 
-    return images;
+    function enterDetailedView(gameImage: GameImage){
+        setSelectedImage(gameImage)
+    }
+
+    function exitDetailedView(){
+        setSelectedImage(null)
+    }
+
+
+
+    return {
+        images,
+        selectedImage,
+        enterDetailedView,
+        exitDetailedView
+    };
 
 }

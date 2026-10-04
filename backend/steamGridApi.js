@@ -11,11 +11,11 @@ export async function getImages(gameId, imageType) {
     const args = (function () {
         switch (imageType) {
             case "grids":
-                return "?dimensions=600x900&nsfw=any";
+                return "?dimensions=600x900&nsfw=false";
             case "heroes":
-                return "?dimensions=1920x620&nsfw=any";
+                return "?dimensions=1920x620&nsfw=false";
             case "icons":
-                return "?nsfw=any";
+                return "?nsfw=false";
             default:
                 return "";
         }
@@ -37,7 +37,6 @@ export async function searchGames(query) {
     console.log(`Searching for ${query}`);
     const responseData = await fetchGet(`${BASE_URL}/search/autocomplete/${query}`);
     return responseData.data
-        .filter(game => game.name.toLowerCase().includes(query.toLowerCase()))
         .map(game => {
             return {
                 id: game.id,
