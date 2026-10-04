@@ -1,14 +1,9 @@
-import {useEffect, useState} from "react";
-import type {GameImage} from "./utils/types.ts";
 import ResultsBox from "./components/ResultsBox.tsx";
 import "./App.css"
-import {fetchImages} from "./utils/api.ts";
 import {useSearch} from "./hooks/useSearch.ts";
+import GameView from "./components/GameView.tsx";
 
 function App() {
-
-
-    const [fetchedImages, setFetchedImages] = useState<GameImage[]>([]);
 
     const {
         query,
@@ -17,7 +12,8 @@ function App() {
         handleSubmit,
         checkboxRef,
         selectedGame,
-        setSelectedGame
+        setSelectedGame,
+        unsetGame
     } = useSearch()
 
     function resolveAppScreen() {
@@ -28,27 +24,12 @@ function App() {
             />
         }
         return (
-            <div>
-                <button onClick={() => setSelectedGame(null)}>RETURN</button>
-                <h1>{selectedGame.title}</h1>
-                <h2>{selectedGame.id}</h2>
-                <h3>:)</h3>
-                {fetchedImages.map((image: GameImage) =>
-                    <img src={image.thumbnail} alt={"hehe"} className="game-card-image"/>
-                )}
-            </div>
+            <GameView
+                game={selectedGame}
+                unsetGame={unsetGame}
+            />
         );
     }
-
-    useEffect(() => {
-        setFetchedImages([])
-        if (!selectedGame) {
-            return;
-        }
-        fetchImages(selectedGame.id, "grids").then(result => {
-            setFetchedImages(result);
-        });
-    }, [selectedGame]);
 
     return (
         <>

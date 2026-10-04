@@ -36,6 +36,10 @@ export function useSearch() {
         return [game]
     }
 
+    function unsetGame(){
+        setSelectedGame(null);
+    }
+
     return {
         query,
         setQuery,
@@ -43,7 +47,8 @@ export function useSearch() {
         handleSubmit,
         checkboxRef,
         selectedGame,
-        setSelectedGame
+        setSelectedGame,
+        unsetGame
     }
 
 }
