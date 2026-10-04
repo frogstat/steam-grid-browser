@@ -15,7 +15,6 @@ function GameCard({id, title}: GameCardProps) {
 
     useEffect(() => {
         fetchCover(id).then((cover: GameImage) => {
-            console.log(cover);
             setImageSrc(cover.thumbnail ?? fallbackImage);
         })
     }, [id])

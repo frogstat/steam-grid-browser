@@ -10,6 +10,7 @@ export function useSearch() {
 
     function handleSubmit(e: any) {
         e.preventDefault();
+        setResults(null);
         if (!query) {
             return;
         }
@@ -32,6 +33,7 @@ export function useSearch() {
     }
 
     return {
+        query,
         setQuery,
         results,
         handleSubmit,

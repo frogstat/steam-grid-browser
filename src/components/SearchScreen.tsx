@@ -9,6 +9,7 @@ type SearchScreenProps = {
 function SearchScreen({setSelectedGame}: SearchScreenProps) {
 
     const {
+        query,
         setQuery,
         results,
         handleSubmit,
@@ -23,8 +24,8 @@ function SearchScreen({setSelectedGame}: SearchScreenProps) {
             return <p>No results were found!</p>
         }
         return results.map((game: Game) =>
-            <div onClick={() => setSelectedGame(game)}>
-                <GameCard key={game.id} id={game.id} title={game.title}/>
+            <div key={game.id} onClick={() => setSelectedGame(game)}>
+                <GameCard id={game.id} title={game.title}/>
             </div>
         )
     }
@@ -32,7 +33,7 @@ function SearchScreen({setSelectedGame}: SearchScreenProps) {
     return (
         <>
             <form onSubmit={e => handleSubmit(e)}>
-                <input type="text" placeholder="Search Game" onChange={(e) => setQuery(e.target.value)}/><br/>
+                <input type="text" value={query} placeholder="Search Game" onChange={(e) => setQuery(e.target.value)}/><br/>
                 <input ref={checkboxRef} type="checkbox"/> Search by ID
             </form>
             <div className={"game-card-container"}>

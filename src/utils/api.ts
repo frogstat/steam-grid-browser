@@ -4,19 +4,19 @@ export type ImageTypes =  "grids" | "heroes" | "icons";
 const BASE_URL = "http://localhost:3001/api"
 
 export async function searchGames(query: string): Promise<Game[]> {
-    return await fetchGet<Game[]>(`${BASE_URL}/search/${query}`);
+    return fetchGet<Game[]>(`${BASE_URL}/search/${query}`);
 }
 
 export async function fetchGame(id: number | string): Promise<Game> {
-    return await fetchGet<Game>(`${BASE_URL}/game/${id}`)
+    return fetchGet<Game>(`${BASE_URL}/game/${id}`)
 }
 
 export async function fetchImages(id: number | string, imageType: ImageTypes): Promise<GameImage[]> {
-    return await fetchGet<GameImage[]>(`${BASE_URL}/images/${imageType}/${id}`)
+    return fetchGet<GameImage[]>(`${BASE_URL}/images/${imageType}/${id}`)
 }
 
-export async function fetchCover(id: number | string): Promise<GameImage> {
-    return await fetchGet<GameImage>(`${BASE_URL}/cover/${id}`)
+async function fetchCoverRemotely(id: number | string): Promise<GameImage> {
+    return fetchGet<GameImage>(`${BASE_URL}/cover/${id}`)
 }
 
 
@@ -26,4 +26,15 @@ export async function fetchGet<T>(url: string): Promise<T> {
         throw new Error(response.statusText);
     }
     return await response.json();
+}
+
+
+export async function fetchCover(id: number | string): Promise<GameImage> {
+    const localCover = sessionStorage.getItem(String(id))
+    if (!localCover) {
+        const result = await fetchCoverRemotely(id)
+        sessionStorage.setItem(String(id), JSON.stringify(result));
+        return result;
+    }
+    return JSON.parse(localCover);
 }
