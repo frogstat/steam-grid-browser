@@ -1,5 +1,6 @@
 body {
-    background: rgb(0 85 66 / 0.84);
+    background: #272b30;
+    color: #e4e4e4;
     font-family: "Noto Sans", sans-serif;
 }
 
@@ -36,26 +37,24 @@ form {
 }
 
 .game-card {
-    color: white;
-
-    background-color: black;
-    border-radius: 10px;
-    padding: 5px;
     cursor: pointer;
     display: flex;
-    gap: 10px;
     flex-direction: column;
     align-items: center;
-    transition: 200ms ease;
-    width: 220px;
-    height: 350px;
 
+    width: 220px;
+    padding: 10px 0;
+    gap: 10px;
+
+    background-color: #131518;
+    border: 2px solid #3b424c;
+    border-radius: 10px;
+
+    transition: 200ms ease;
 
     &:hover {
         transition: 200ms ease;
-        scale: 1.01;
-        box-shadow: 0 0 1.875rem 0.0625rem #404040;
-        transform: translateY(-2px);
+        transform: translateY(-5px);
     }
 }
 
@@ -70,16 +69,27 @@ form {
 .game-card-image {
     height: 300px;
     width: 200px;
-    margin-top: 5px;
     border-radius: 10px;
+    border: 1px solid rgb(236 236 236 / 0.2);
 }
 
 
 /*----------------Images View----------*/
 
+.game-view-title{
+    font-family: Montserrat, sans-serif;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    font-style: italic;
+    margin: 0;
+}
+
 .image-view {
     text-align: center;
-    background-color: #434343;
+    background-color: #131518;
+    width: 80vw;
+    min-width: 700px;
     border-radius: 10px;
 }
 

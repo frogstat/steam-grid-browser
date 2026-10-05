@@ -2,32 +2,32 @@ import fallbackImage from "../assets/fallback.png"
 import blackImage from "../assets/loading.gif"
 import {useEffect, useState} from "react";
 import {fetchCover} from "../utils/api.ts";
-import type {GameImage} from "../utils/types.ts";
+import type {Game, GameImage} from "../utils/types.ts";
 
 type GameCardProps = {
-    id: number;
-    title: string;
+    game: Game;
+    setSelectedGame: (game: Game) => void;
 }
 
-function GameCard({id, title}: GameCardProps) {
+function GameCard({game, setSelectedGame}: GameCardProps) {
 
     const [imageSrc, setImageSrc] = useState(blackImage);
 
     useEffect(() => {
-        fetchCover(id).then((cover: GameImage) => {
+        fetchCover(game.id).then((cover: GameImage) => {
             setImageSrc(cover.thumbnail ?? fallbackImage);
         })
-    }, [id])
+    }, [game])
 
 
     return (
-        <div className="game-card">
+        <div className="game-card" onClick={() => setSelectedGame(game)}>
             <img
                 className="game-card-image"
                 src={imageSrc}
                 alt="cover"/>
             <div className="game-card-title">
-                <span>{title}</span>
+                <span>{game.title}</span>
             </div>
 
         </div>

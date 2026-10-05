@@ -16,9 +16,7 @@ function ResultsBox({setSelectedGame, results}: SearchScreenProps) {
             return <p>No results were found!</p>
         }
         return results.map((game: Game) =>
-            <div key={game.id} onClick={() => setSelectedGame(game)}>
-                <GameCard id={game.id} title={game.title}/>
-            </div>
+            <GameCard key={game.id} game={game} setSelectedGame={setSelectedGame}/>
         )
     }
 

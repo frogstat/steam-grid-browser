@@ -13,7 +13,7 @@ function GameView({game, unsetGame}: GameViewProps) {
     return (
         <div className="game-view">
             <button onClick={unsetGame}>Return</button>
-            <h1>{game.title}</h1>
+            <p className="game-view-title">{game.title}</p>
             <ImagesView id={game.id} imageType={"grids"}/>
             <ImagesView id={game.id} imageType={"heroes"}/>
             <ImagesView id={game.id} imageType={"icons"}/>
