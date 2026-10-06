@@ -1,10 +1,12 @@
 import {fetchImages, type ImageTypes} from "../utils/api.ts";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import type {GameImage} from "../utils/types.ts";
 
 export function useImagesView(id:number, imageType: ImageTypes) {
     const [images, setImages] = useState<GameImage[] | null>(null)
     const [selectedImage, setSelectedImage] = useState<GameImage | null>(null)
+    const [maxImages, setMaxImages] = useState(6)
+    const imagesViewRef = useRef<HTMLDivElement>(null)
 
 
     useEffect(() => {
@@ -25,13 +27,23 @@ export function useImagesView(id:number, imageType: ImageTypes) {
         setSelectedImage(null)
     }
 
+    useEffect(() => {
+        imagesViewRef.current?.scrollIntoView({
+            block: "start",
+            behavior: "smooth"
+        });
+    },[maxImages])
+
 
 
     return {
         images,
         selectedImage,
         enterDetailedView,
-        exitDetailedView
+        exitDetailedView,
+        maxImages,
+        setMaxImages,
+        imagesViewRef
     };
 
 }

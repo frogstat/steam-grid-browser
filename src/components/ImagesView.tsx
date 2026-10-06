@@ -16,7 +16,10 @@ function ImagesView({id, imageType}: ImagesViewProps) {
         images,
         selectedImage,
         enterDetailedView,
-        exitDetailedView
+        exitDetailedView,
+        maxImages,
+        setMaxImages,
+        imagesViewRef
     } = useImagesView(id, imageType);
 
     function resolveImages() {
@@ -25,7 +28,9 @@ function ImagesView({id, imageType}: ImagesViewProps) {
         } else if (images.length === 0) {
             return <p>No images found</p>
         }
-        return images.slice(0,6).map((image: GameImage, index: number) =>
+        return images
+            .slice(0,maxImages)
+            .map((image: GameImage, index: number) =>
             <div
                 key={index}
                 className="images-view-image-container"
@@ -33,17 +38,21 @@ function ImagesView({id, imageType}: ImagesViewProps) {
                 <Image thumbnail={image.thumbnail} imageType={imageType}/>
             </div>
         )
-
-
     }
 
     return (
         <>
-            <div className="image-view">
+            <div className="images-view" ref={imagesViewRef}>
                 <h1>{imageType}</h1>
                 <div className="images-container">
                     {resolveImages()}
                 </div>
+                {images && images.length > maxImages &&
+                    <button onClick={() => setMaxImages(9999)}>Show More</button>
+                }
+                {images && images.length < maxImages &&
+                    <button onClick={() => setMaxImages(6)}>Show Fewer</button>
+                }
             </div>
 
             {selectedImage &&

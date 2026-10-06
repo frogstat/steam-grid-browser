@@ -9,11 +9,12 @@ type GameViewProps = {
 function GameView({game, unsetGame}: GameViewProps) {
 
 
-
     return (
         <div className="game-view">
-            <button onClick={unsetGame}>Return</button>
-            <p className="game-view-title">{game.title}</p>
+            <div className="game-view-header">
+                <button className="game-view-button" onClick={unsetGame}>Return</button>
+                <p className="game-view-title">{game.title}</p>
+            </div>
             <ImagesView id={game.id} imageType={"grids"}/>
             <ImagesView id={game.id} imageType={"heroes"}/>
             <ImagesView id={game.id} imageType={"icons"}/>
