@@ -2,6 +2,11 @@ import 'dotenv/config'
 const API_KEY = process.env.API_KEY;
 
 export async function fetchGet(url) {
+
+    if(!API_KEY){
+        throw new Error("API key is missing!")
+    }
+
     const response = await fetch(url, {
         method: "GET",
         headers: {
