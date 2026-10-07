@@ -21,7 +21,8 @@ router.get("/game/:id", async (req, res) => {
 router.get("/images/:type/:id", async (req, res) => {
     try {
         const { type, id } = req.params;
-        return res.status(200).json(await getImages(id, type));
+        const { nsfw } = req.query;
+        return res.status(200).json(await getImages(id, type, nsfw));
     } catch (e) {
         return handleError(res, e.message);
     }

@@ -20,7 +20,7 @@ function Image({thumbnail, imageType}: ImageProps) {
                 style={{opacity: isLoaded ? 1 : 0.2, transition: "opacity 0.4s"}}
                 className={`images-view-image images-view-image-${imageType}`}
                 src={thumbnail}
-                alt="thumbnail"
+                alt=""
                 onLoad={() => setIsLoaded(true)}
             />
         </div>

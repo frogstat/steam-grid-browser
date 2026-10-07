@@ -1,16 +1,17 @@
 import type {ImageTypes} from "../utils/api.ts";
 import {useImagesView} from "../hooks/useImagesView.ts";
-import type {GameImage} from "../utils/types.ts";
+import type {GameImage, AllowNsfw} from "../utils/types.ts";
 import DetailedImageView from "./DetailedImageView.tsx";
 import Image from "./Image.tsx";
 
 type ImagesViewProps = {
     id: number;
-    imageType: ImageTypes
+    imageType: ImageTypes,
+    allowNsfw: AllowNsfw;
 }
 
 
-function ImagesView({id, imageType}: ImagesViewProps) {
+function ImagesView({id, imageType, allowNsfw}: ImagesViewProps) {
 
     const {
         images,
@@ -19,7 +20,7 @@ function ImagesView({id, imageType}: ImagesViewProps) {
         exitDetailedView,
         maxImages,
         setMaxImages
-    } = useImagesView(id, imageType);
+    } = useImagesView(id, imageType, allowNsfw);
 
     function resolveImages() {
         if (!images) {

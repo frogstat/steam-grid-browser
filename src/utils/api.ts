@@ -1,18 +1,19 @@
-import type {Game, GameImage} from "./types.ts";
+import type {AllowNsfw, Game, GameImage} from "./types.ts";
 export type ImageTypes =  "grids" | "heroes" | "icons";
 
 const BASE_URL = "http://localhost:3001/api"
 
 export async function searchGames(query: string): Promise<Game[]> {
-    return fetchGet<Game[]>(`${BASE_URL}/search/${query}`);
+    return fetchGet<Game[]>(`${BASE_URL}/search/${encodeURIComponent(query)}`);
 }
 
 export async function fetchGame(id: number | string): Promise<Game> {
     return fetchGet<Game>(`${BASE_URL}/game/${id}`)
 }
 
-export async function fetchImages(id: number | string, imageType: ImageTypes): Promise<GameImage[]> {
-    return fetchGet<GameImage[]>(`${BASE_URL}/images/${imageType}/${id}`)
+export async function fetchImages(id: number | string, imageType: ImageTypes, allowNsfw:AllowNsfw): Promise<GameImage[]> {
+    console.log(allowNsfw);
+    return fetchGet<GameImage[]>(`${BASE_URL}/images/${imageType}/${id}?nsfw=${allowNsfw}`);
 }
 
 async function fetchCoverRemotely(id: number | string): Promise<GameImage> {
