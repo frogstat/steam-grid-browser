@@ -18,8 +18,7 @@ function ImagesView({id, imageType}: ImagesViewProps) {
         enterDetailedView,
         exitDetailedView,
         maxImages,
-        setMaxImages,
-        imagesViewRef
+        setMaxImages
     } = useImagesView(id, imageType);
 
     function resolveImages() {
@@ -42,17 +41,17 @@ function ImagesView({id, imageType}: ImagesViewProps) {
 
     return (
         <>
-            <div className="images-view" ref={imagesViewRef}>
+            <div className="images-view">
                 <h1>{imageType}</h1>
-                <div className="images-container">
-                    {resolveImages()}
-                </div>
                 {images && images.length > maxImages &&
                     <button onClick={() => setMaxImages(9999)}>Show More</button>
                 }
                 {images && images.length < maxImages &&
                     <button onClick={() => setMaxImages(6)}>Show Fewer</button>
                 }
+                <div className="images-container">
+                    {resolveImages()}
+                </div>
             </div>
 
             {selectedImage &&

@@ -121,6 +121,7 @@ form {
     justify-content: center;
     padding: 40px;
     gap: 10px;
+    transition: height 300ms ease;
 }
 
 .images-view-image {
